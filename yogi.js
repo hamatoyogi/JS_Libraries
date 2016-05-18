@@ -6,7 +6,7 @@ window.yogi = (function () {
 
     function ajaxPromise(type, url, headers, content) {
         var DEFAULT_HEADERS = {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         };
         headers = headers || DEFAULT_HEADERS;
         content = content || null;
@@ -80,10 +80,64 @@ window.yogi = (function () {
         }
         return dups;
     }
+    function getMonthFromString(mon) {
+
+        var d = Date.parse(mon + "1, 2012");
+        if (!isNaN(d)) {
+            var d1 = new Date(d).getMonth();
+            return monthNames[d1];
+        }
+        return -1;
+    }
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+    function findWithAttr(array, attr, value) {
+        for (var i = 0; i < array.length; i += 1) {
+            if (array[i][attr] === value) {
+                return i;
+            }
+        }
+    }
+
+    function buildTableFromData(data) {
+        // Your code here.
+        var table = document.createElement('table');
+        var headers = document.createElement('tr');
+
+        for (var i = 0; i < data.length; i++) {
+            var row = data[i];
+            var tr = document.createElement('tr');
+
+            for (var key in row) {
+
+                if (i === 0) {
+                    var th = document.createElement('th');
+                    th.textContent = key;
+                    headers.appendChild(th);
+                }
+
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode(row[key]));
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+        table.insertBefore(headers, table.querySelector('tr'));
+        return table;
+    }
+
 
     return {
         ajaxPromise: ajaxPromise,
         searchData: searchData,
-        shuffle: shuffle
+        shuffle: shuffle,
+        getMonthFromString : getMonthFromString,
+        numberWithCommas : numberWithCommas,
+        findWithAttr : findWithAttr,
+        buildTableFromData : buildTableFromData
+        
     };
 })();
