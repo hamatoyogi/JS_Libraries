@@ -138,6 +138,8 @@ window.yogi = (function () {
         numberWithCommas : numberWithCommas,
         findWithAttr : findWithAttr,
         buildTableFromData : buildTableFromData
+
+        
         
     };
 })();
