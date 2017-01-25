@@ -103,7 +103,6 @@ window.yogi = (function () {
     }
 
     function buildTableFromData(data) {
-        // Your code here.
         var table = document.createElement('table');
         var headers = document.createElement('tr');
 
